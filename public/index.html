@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>User Registration</h1>
+        <form id="userForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter email" required>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        <div id="responseMessage"></div> <!-- Display success or error message -->
+    </div>
+
+    <script>
+        const form = document.getElementById('userForm');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+
+            // Basic frontend validation
+            if (!username || !email) {
+                document.getElementById('responseMessage').textContent = 'Username and email are required.';
+                document.getElementById('responseMessage').style.color = 'red';
+                return;
+            }
+
+            // Sending POST request to API
+            try {
+                const response = await fetch('/api/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, email }),
+                });
+
+                const data = await response.json();
+                const messageDiv = document.getElementById('responseMessage');
+
+                if (response.ok) {
+                    messageDiv.textContent = `User added successfully: ${data.username}`;
+                    messageDiv.style.color = 'green';
+                } else {
+                    messageDiv.textContent = `Error: ${data.error}`;
+                    messageDiv.style.color = 'red';
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById('responseMessage').textContent = 'Error connecting to the server.';
+                document.getElementById('responseMessage').style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>

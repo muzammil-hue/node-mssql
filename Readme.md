@@ -8,7 +8,14 @@ A simple Node.js application that connects to an MS SQL database, retrieves data
 - RESTful API to fetch user data.
 - Automated deployment to Azure Web App via GitHub Actions.
 
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/nodejs-mssql-app.git
+## DB Configuration
+
+CREATE TABLE Users (
+    ID INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(50),
+    Email NVARCHAR(50)
+);
+
+
+
+   

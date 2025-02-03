@@ -1,0 +1,28 @@
+name: Deploy via Bastion Host
+
+on:
+  push:
+    branches:
+      - main  # Change to the branch you want to trigger the deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: SSH into Bastion and Deploy
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.BASTION_HOST }}
+          username: ubuntu
+          key: ${{ secrets.BASTION_SSH_PRIVATE_KEY }}
+          script: |
+            ssh -o StrictHostKeyChecking=no ubuntu@172.31.2.123 << 'EOF'
+              cd /home/ubuntu/node-mssql
+              git stash
+              git pull origin main
+              pm2 restart 0
+            EOF

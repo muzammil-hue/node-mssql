@@ -23,7 +23,8 @@ jobs:
       - name: SSH into Bastion Host and Deploy to Main Server
         run: |
           ssh -i ~/.ssh/id_rsa ubuntu@${{ secrets.BASTION_HOST }} << 'EOF'
-            ssh -o StrictHostKeyChecking=no ubuntu@172.31.2.123 << 'INNER_SSH'
+            ssh-keyscan -H 172.31.2.123 >> ~/.ssh/known_hosts
+            ssh -o StrictHostKeyChecking=no -i ~/.ssh/demo.pem ubuntu@172.31.2.123 << 'INNER_SSH'
               cd /home/ubuntu/node-mssql
               git stash
               git pull origin main

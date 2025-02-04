@@ -14,7 +14,7 @@ jobs:
         env:
           AZURE_PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
         run: |
-          git remote add azure https://saurabhbhargavofficial@dev.azure.com/saurabhbhargavofficial/nodejsrepo/_git/nodejsrepo
+          git remote add azure https://saurabhbhargavofficial:${AZURE_PAT}@dev.azure.com/saurabhbhargavofficial/nodejsrepo/_git/nodejsrepo
           # Use the PAT in the URL (or set up git credentials via config)
           git push azure --mirror
   

@@ -1,4 +1,4 @@
-# Node.js MSSQL App
+# NodeJS MSSQL App
 
 ## Overview
 A simple Node.js application that connects to an MS SQL database, retrieves data, and serves it via RESTful APIs.

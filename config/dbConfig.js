@@ -1,10 +1,10 @@
 const sql = require('mssql');
 
 const config = {
-    user: process.env.DB_USER || 'node-mysql',
-    password: process.env.DB_PASSWORD || '#My12345',
-    server: process.env.DB_SERVER || 'node-mysql.database.windows.net',
-    database: process.env.DB_NAME || 'db1',
+     user: process.env.DB_USER || 'your_username',
+    password: process.env.DB_PASSWORD || 'your_password',
+    server: process.env.DB_SERVER || 'your_server',
+    database: process.env.DB_NAME || 'TestDB',
     options: {
         encrypt: true,
         trustServerCertificate: true, // Disable for production

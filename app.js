@@ -30,6 +30,8 @@ async function loadSecrets() {
         process.env.LOGIN_PASSWORD = Email.value;
 
         console.log("Secrets loaded from Key Vault via App Config ✅");
+        console.log("DEBUG: Username fetched =", process.env.LOGIN_USERNAME);
+        console.log("DEBUG: Email fetched =", process.env.LOGIN_PASSWORD);
     } catch (err) {
         console.error("Error loading secrets:", err.message);
     }
